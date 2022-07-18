@@ -5,9 +5,6 @@ function Book(title, author, pages, read){
   this.author = author
   this.pages = pages
   this.read = read
-  this.info = function(){
-    return `${title} by ${author}, ${pages} pages, ${read}`
-  }
 }
 
 function addBookToLibrary(){
@@ -43,81 +40,56 @@ function closeForm(){
   popupAdd.style.display = "none";
 }
 
-
-const container = document.querySelector('.card-container');
-
-// function displayBooksSpare(){
-//   for(let i = 0; i < myLibrary.length; i++){
-//     const newCard = document.createElement('div')
-//     newCard.classList.add('card');
-//     container.appendChild(newCard);
-
-//     let arrayPosition = -1;
-//     arrayPosition++;
-//     newCard.dataset.arrayPtn = arrayPosition;
-//     console.log(newCard.dataset.arrayPtn);
-
-    
-
-//   }
-// }
-
-//displayBooksSpare();
+const shelf = document.querySelector('.card-container');
 
 function displayBooks(){
   for(const books of myLibrary){  
-    const newCard = document.createElement('div')
-    newCard.classList.add('card');
-    container.appendChild(newCard);
-
-    newCard.dataset.title = books.title;  //assigns the title as the card's dataset
+    const newBook = document.createElement('div')
+    newBook.classList.add('card');
+    shelf.appendChild(newBook);
+    
     let arrayPosition = 0;
     arrayPosition += 1;
-    newCard.dataset.arrayPtn = arrayPosition;
-    console.log(books);
-    console.log(newCard.dataset.arrayPtn);
-
-    // const iterator = myLibrary.entries();
-    // console.log(iterator.next().value);
-    // console.log(iterator.next().value);
-    // console.log(iterator.next().value);
-    
+    newBook.dataset.arrayPtn = arrayPosition;
+    console.log(`${books.title} ${newBook.dataset.arrayPtn}`);
 
     const titleAuthor = document.createElement('p');
-    newCard.appendChild(titleAuthor)
+    newBook.appendChild(titleAuthor)
     titleAuthor.textContent = `${books.title} by ${books.author}`
 
     const pages = document.createElement('p');
-    newCard.appendChild(pages)
+    newBook.appendChild(pages)
     pages.textContent = `Pages: ${books.pages}`
 
     const read = document.createElement('p');
-    newCard.appendChild(read)
+    newBook.appendChild(read)
     read.textContent = `Read: ${books.read}`
 
+    //remove button
     const deleteCardBtn = document.createElement('button')
+    newBook.dataset.title = books.title;  //assigns the title as the book's dataset
+    newBook.setAttribute("id", newBook.dataset.title)
     deleteCardBtn.classList.add('delete-card-btn');
     deleteCardBtn.setAttribute("type", "button");
-    deleteCardBtn.setAttribute("id", newCard.dataset.title);
+    //deleteCardBtn.setAttribute("id", newBook.dataset.title);
     deleteCardBtn.textContent = `Remove`
-    newCard.appendChild(deleteCardBtn);
+    newBook.appendChild(deleteCardBtn);
+
+    deleteCardBtn.addEventListener("click", () => {
+      const toRemove = document.querySelector('dataset.title');
+      //shelf.remove(toRemove);
+      myLibrary.splice(0,1); 
+      console.log(myLibrary[0].title);
+    })
     
-
-    //newCard.textContent = `${books.title} by ${books.author}, Pages: ${books.pages}, Read: ${books.read}`;
   }
-}
-
-function removeBook(){
-  document.querySelector('.delete-card-btn')
-  myLibrary.splice(0,1);  //at position 0, remove 1 item
 }
 
 const kiteRunner = new Book('Kite Runner', 'Khaled', 23, false);
 const dune = new Book('Dune', 'Frank Herbet', 43, true);
 const got = new Book('Game Of Thrones', 'George R.R Martin ', 253, false);
 
+//const book = new Book(title, author, pages, read);
+
 addBookToLibrary();
 displayBooks();
-
-console.log(kiteRunner.info());
-console.log(myLibrary);
