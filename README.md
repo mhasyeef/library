@@ -6,6 +6,7 @@ Features
 - A delete button to remove books that you want to remove
 - A button to update the status of books that you have read
 
-
+Problems faced
+- Constructor had to be created every single time a new entry is made. Not dynamic.
 Background taken from
 https://unsplash.com/photos/YLSwjSy7stw
