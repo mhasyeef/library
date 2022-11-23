@@ -1,18 +1,20 @@
 let myLibrary = [];
 
-//constructor
-function Book(id, title, author, pages, read){
-  this.id = id;
-  this.title = title
-  this.author = author
-  this.pages = pages
-  this.read = read
+class Book{
+  constructor(id, title, author, pages, read) {
+    this.id = id;
+    this.title = title
+    this.author = author
+    this.pages = pages
+    this.read = read
+  }
 }
 
 function addBookToLibrary(){
   myLibrary.push(kiteRunner)
   myLibrary.push(dune)
   myLibrary.push(got)
+  //myLibrary.push(got1)
 
 }
 
@@ -70,7 +72,6 @@ function displayBooks(){
     //to toggle read status
     const toggleReadBtn = document.createElement('label');
     read.appendChild(toggleReadBtn);
-    
     toggleReadBtn.classList.add('switch');
     const input = document.createElement('input');
     input.setAttribute("type", "checkbox");
@@ -107,8 +108,6 @@ function displayBooks(){
     
   }
 }
-
-
 
 const kiteRunner = new Book('1', 'Kite Runner', 'Khaled', 23, false);
 const dune = new Book('2', 'Dune', 'Frank Herbet', 43, true);
